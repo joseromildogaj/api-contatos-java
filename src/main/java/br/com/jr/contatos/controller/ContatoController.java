@@ -19,7 +19,7 @@ import br.com.jr.contatos.entity.ContatoEntity;
 import br.com.jr.contatos.service.ContatoService;
 
 @RestController
-@RequestMapping("/contato")
+@RequestMapping("/contatos")
 public class ContatoController {
 
 	@Autowired

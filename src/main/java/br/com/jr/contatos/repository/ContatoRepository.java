@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.jr.contatos.entity.ContatoEntity;
 
 @Repository
-public interface ContatoRepository extends JpaRepository<ContatoEntity, Integer>{
-	
-	
+public interface ContatoRepository extends JpaRepository<ContatoEntity, Integer> {
 
 }

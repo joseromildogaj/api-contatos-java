@@ -14,36 +14,29 @@ public class ContatoService {
 
 	@Autowired
 	private ContatoRepository repository;
-	
 
 	public List<ContatoEntity> findAll() {
 		return repository.findAll();
 	}
-	
 
 	public ContatoEntity save(ContatoEntity contato) {
 		return repository.save(contato);
 	}
-	
 
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
-	
 
 	public void deleteAll() {
 		repository.deleteAll();
 	}
-	
 
 	public Optional<ContatoEntity> findById(Integer id) {
 		return repository.findById(id);
 	}
-	
 
 	public ContatoEntity update(ContatoEntity contato) {
 		return repository.save(contato);
 	}
-	
 
 }

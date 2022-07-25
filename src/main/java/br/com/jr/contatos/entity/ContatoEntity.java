@@ -24,11 +24,9 @@ public class ContatoEntity {
 	@Column(nullable = true, unique = true)
 	private String email;
 
-	
 	public ContatoEntity() {
 
 	}
-	
 
 	public ContatoEntity(String nome, String fone, String email) {
 		this.nome = nome;
@@ -39,43 +37,35 @@ public class ContatoEntity {
 	public Integer getId() {
 		return id;
 	}
-	
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
 
 	public String getNome() {
 		return nome;
 	}
-	
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 
 	public String getFone() {
 		return fone;
 	}
-	
 
 	public void setFone(String fone) {
 		this.fone = fone;
 	}
-	
 
 	public String getEmail() {
 		return email;
 	}
-	
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "ContatoEntity [id=" + id + ", nome=" + nome + ", fone=" + fone + ", email=" + email + "]";
