@@ -23,52 +23,36 @@ import br.com.jr.contatos.service.ContatoService;
 public class ContatoController {
 
 	@Autowired
-	public ContatoService service;
-
-	@GetMapping
-	public List<ContatoEntity> listarContatos() {
-		return service.findAll();
-	}
-
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> pesquisaContato(@PathVariable Integer id) {
-		Optional<ContatoEntity> contact = service.findById(id);
-		if (contact.isPresent()) {
-			return ResponseEntity.ok(contact);
-		}
-		return ResponseEntity.notFound().build();
-	}
+	private ContatoService service;
 
 	@PostMapping
-	public ResponseEntity<ContatoEntity> save(@RequestBody ContatoEntity contact) {
-		service.save(contact);
-		return ResponseEntity.status(HttpStatus.CREATED).body(contact);
+	public ResponseEntity<ContatoEntity> save(@RequestBody ContatoEntity contato) {
+		ContatoEntity contatoEntity = service.save(contato);
+		return ResponseEntity.status(HttpStatus.CREATED).body(contatoEntity);
 	}
 
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody ContatoEntity contact) {
-		Optional<ContatoEntity> contato = service.findById(id);
-		if (contato.isPresent() && contact.getId() == id) {
-			service.save(contact);
-			return ResponseEntity.ok().body(contact);
-		}
-		return ResponseEntity.badRequest().build();
+	@GetMapping
+	public ResponseEntity<List<ContatoEntity>> listarContatos() {
+		List<ContatoEntity> contatos = service.findAll();
+		return ResponseEntity.ok(contatos);
 	}
 
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<?> removeById(@PathVariable("id") Integer id) {
-		Optional<ContatoEntity> contact = service.findById(id);
-		if (contact.isPresent()) {
-			service.deleteById(id);
-			return ResponseEntity.noContent().build();
-		}
-		return ResponseEntity.notFound().build();
+	@GetMapping("/{id}")
+	public ResponseEntity<ContatoEntity> pesquisaContato(@PathVariable Integer id) {
+		ContatoEntity contato = service.findById(id);
+		return ResponseEntity.ok(contato);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<?> deleteAll() {
-		service.deleteAll();
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	@PutMapping("/{id}")
+	public ResponseEntity<ContatoEntity> update(@PathVariable Integer id, @RequestBody ContatoEntity contato) {
+		ContatoEntity contatoEntity = service.update(id, contato);
+		return ResponseEntity.ok(contatoEntity);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> removeById(@PathVariable Integer id) {
+		service.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
