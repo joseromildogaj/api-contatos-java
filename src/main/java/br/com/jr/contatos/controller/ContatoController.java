@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.jr.contatos.entity.ContatoEntity;
 import br.com.jr.contatos.service.ContatoService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/contatos")
 public class ContatoController {
@@ -26,7 +28,7 @@ public class ContatoController {
 	private ContatoService service;
 
 	@PostMapping
-	public ResponseEntity<ContatoEntity> save(@RequestBody ContatoEntity contato) {
+	public ResponseEntity<ContatoEntity> save(@RequestBody @Valid ContatoEntity contato) {
 		ContatoEntity contatoEntity = service.save(contato);
 		return ResponseEntity.status(HttpStatus.CREATED).body(contatoEntity);
 	}
@@ -44,7 +46,7 @@ public class ContatoController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ContatoEntity> update(@PathVariable Integer id, @RequestBody ContatoEntity contato) {
+	public ResponseEntity<ContatoEntity> update(@PathVariable Integer id, @Valid @RequestBody ContatoEntity contato) {
 		ContatoEntity contatoEntity = service.update(id, contato);
 		return ResponseEntity.ok(contatoEntity);
 	}
