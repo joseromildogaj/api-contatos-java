@@ -7,5 +7,5 @@ import br.com.jr.contatos.entity.ContatoEntity;
 
 @Repository
 public interface ContatoRepository extends JpaRepository<ContatoEntity, Integer> {
-
+    boolean existsByEmail(String email);
 }

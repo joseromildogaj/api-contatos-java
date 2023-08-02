@@ -1,5 +1,6 @@
 package br.com.jr.contatos.controller.exceptions;
 
+import br.com.jr.contatos.exceptions.ExistingEmailException;
 import br.com.jr.contatos.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,16 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
             errors.put(fieldName, message);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ExistingEmailException.class)
+    public ResponseEntity<StandardException> handleExistingEmailException(
+            ExistingEmailException e, HttpServletRequest request){
+        StandardException error = new StandardException();
+        error.setTimeStamp(Instant.now());
+        error.setStatus(HttpStatus.CONFLICT.value());
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
 }

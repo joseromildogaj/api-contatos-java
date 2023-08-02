@@ -3,6 +3,7 @@ package br.com.jr.contatos.service;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.jr.contatos.exceptions.ExistingEmailException;
 import br.com.jr.contatos.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class ContatoService {
 	private ContatoRepository repository;
 
 	public ContatoEntity save(ContatoEntity contato) {
+		if (repository.existsByEmail(contato.getEmail())){
+			throw new ExistingEmailException("O email informado já existe");
+		}
 		return  repository.save(contato);
 	}
 

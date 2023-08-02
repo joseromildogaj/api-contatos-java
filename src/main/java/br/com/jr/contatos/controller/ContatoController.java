@@ -34,13 +34,13 @@ public class ContatoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ContatoEntity>> listarContatos() {
+	public ResponseEntity<List<ContatoEntity>> findAll() {
 		List<ContatoEntity> contatos = service.findAll();
 		return ResponseEntity.ok(contatos);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ContatoEntity> pesquisaContato(@PathVariable Integer id) {
+	public ResponseEntity<ContatoEntity> findById(@PathVariable Integer id) {
 		ContatoEntity contato = service.findById(id);
 		return ResponseEntity.ok(contato);
 	}
