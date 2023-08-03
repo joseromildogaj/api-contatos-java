@@ -36,6 +36,10 @@ public class ContatoService {
 				()->new ResourceNotFoundException("Contato não encontrado com id " + id));
 	}
 
+	public List<ContatoEntity> findByName(String name){
+		return repository.findByNomeIgnoreCaseContaining(name);
+	}
+
 	public ContatoEntity update(Integer id, ContatoEntity contato) {
 		ContatoEntity contatoEntity = findById(id);
 		contato.setId(contatoEntity.getId());
